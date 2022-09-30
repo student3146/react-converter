@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Block } from './Block';
-import Header from './Header';
+import { Block } from './components/Block';
+import Header from './components/Header';
 import './index.scss';
 
 function App() {
@@ -45,16 +45,18 @@ function App() {
   return (
     
     <div className="App">
-        <div className='head'>
-      <Header/>
-      </div>
-
+       
+       
       <Block
        value={fromPrice}
        currency={fromCurrency} 
        onChangeCurrency={setFromCurrency} 
        onChangeValue={onChangeFromPrice}
        />
+
+      <div className='head'>
+      <Header/>
+      </div>
 
       <Block 
       value={toPrice} 
