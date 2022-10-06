@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 // import axios from "axios";
 
-const useFetch = (url, options) => {
+const useFetchCur = (url, options) => {
     const [status, setStatus] = useState({
         dollarData: undefined,
-        euroData: undefined,
-        rates: {},
-        error: undefined 
+        euroData: undefined, 
     })
     
     
@@ -18,12 +16,11 @@ const useFetch = (url, options) => {
       .then((res) => res.json())
       .then((data) => {
         setStatus({
-          rates: data.rates,
+          dollarData: data[0].buy,
+          euroData: data[1].buy,
         })
       })
-        .catch((error) => {
-            setStatus({error})
-        });
+
       
 
     }
@@ -40,4 +37,4 @@ const useFetch = (url, options) => {
     }
 }
 
-export default useFetch
+export default useFetchCur

@@ -1,31 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { Block } from './components/Block';
 import Header from './components/Header';
+import useFetch from './hooks/useFetch';
 import './index.scss';
 
-function App() {
+function App(props) {
   const [fromCurrency, setFromCurrency] = useState('UAH')
   const [toCurrency, setToCurrency] = useState('UAH')
   const [fromPrice, setFromPrice] = useState(0)
   const [toPrice, setToPrice] = useState(0)
 
-  const [rates, setRates] = useState({})
 
-  useEffect(() => {
-    fetch('https://cdn.cur.su/api/nbu.json')
-    .then((res) => res.json())
-    .then((json) => {
-      setRates(json.rates);
-      console.log(json.rates)
-    })
-    
-  }, [])
+  const { rates } = useFetch('https://cdn.cur.su/api/nbu.json')
+  console.log(rates);
+
+ 
+
 
   const onChangeFromPrice = (value) => {
     const price = value / rates[fromCurrency]
     const result = price * rates[toCurrency]
     setFromPrice(value)
     setToPrice(result.toFixed(1))
+    console.log(rates);
   }
 
   const onChangeToPrice = (value) => {

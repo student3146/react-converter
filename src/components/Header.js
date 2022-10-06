@@ -1,49 +1,41 @@
-// import { useEffect, useState } from "react";
-// import axios from "axios";
+import { useDispatch, useSelector } from 'react-redux';
 import '../components/Header.css'
-import useFetch from "../hooks/useFetch";
+
+import useFetchCur from '../hooks/useFetchCur';
+
 
 
 export default function Header (props){
 
-    const {dollarData, euroData}  = useFetch('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5');
+    
+    const {dollarData, euroData} = useFetchCur('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
+    const dispatch = useDispatch();
+    const cash = useSelector(state => state.reducer.cash)
+    const cashE = useSelector(state => state.reducerE.cashE)
+
+    const courseDolar = (cash) => {
+        dispatch({type: 'COURSE_DOLLAR', payload: dollarData  })
+    }
+
+    const courseEuro = (cashE) => {
+        dispatch({type: 'COURSE_EURO', payload: euroData})
+    }
+
+
 
     
-    // const [curData, setCurData] = useState({})
-
-    // useEffect(() => {
-    //   fetch('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setCurData({
-    //       dollarData: data[0].buy,
-    //       euroData: data[1].buy,
-    //     })
-    //   })
-      
-    // }, [setCurData])
-    
-    
-    // useEffect(() => {
-    //     const apiUrl =
-    //       "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
-    //     axios.get(apiUrl).then((resp) => {
-    //       setCurData({
-    //         dollarData: resp.data[0].buy,
-    //         euroData: resp.data[1].buy,
-    //       });
-    //     });
-    //   }, [setCurData]);
-
-
-
 
     return(
         <div className="Header">
             <h1>Converter</h1>
             <h2>
-                <span>$ {(dollarData * 100) / 100} </span>
-                <span>€ {(euroData * 100) / 100} </span>
+                <div className='cur'>
+                <span className='span1'>$  {(cash * 100) / 100}  </span>
+                <button className='btn' onClick={() => courseDolar(cash)}>DOLLAR RATE</button>
+                <span className='span2'> € {(cashE * 100) / 100} </span>
+                <button className='btn' onClick={() => courseEuro(cashE)}>EURO RATE</button>
+                </div>
+
             </h2>
         </div>
     )

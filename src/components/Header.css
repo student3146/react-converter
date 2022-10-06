@@ -31,4 +31,38 @@
     font-weight: 100px;
     display: inline-block
   }
+
+  .cur{
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .btn{
+      display: inline-block;
+      box-sizing: border-box;
+      padding: 0 25px;
+      margin: 0 15px 15px 0;
+      outline: none;
+      border: 1px solid #fff;
+      border-radius: 50px;
+      height: 46px;
+      line-height: 46px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      color: #444;
+      background-color: #0004;
+      box-shadow: 0 4px 6px rgb(65 132 144 / 10%), 0 1px 3px rgb(0 0 0 / 8%);
+      cursor: pointer;
+      user-select: none;
+      appearance: none;
+      touch-action: manipulation;
+      vertical-align: top;
+      transition: box-shadow 0.2s;
+    
+  }
   
